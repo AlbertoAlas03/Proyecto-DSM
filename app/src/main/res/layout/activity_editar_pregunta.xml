@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Campo para editar el texto de la pregunta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pregunta:"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/editTextPregunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese la pregunta"
+            android:inputType="textMultiLine"
+            android:minLines="3"/>
+
+        <!-- Sección para editar opciones de respuesta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opciones de respuesta:"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"/>
+
+        <!-- Opción 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opción 1:"/>
+
+        <EditText
+            android:id="@+id/editTextOpcion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Texto opción 1"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Opción 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opción 2:"/>
+
+        <EditText
+            android:id="@+id/editTextOpcion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Texto opción 2"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Opción 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opción 3:"/>
+
+        <EditText
+            android:id="@+id/editTextOpcion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Texto opción 3"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Selección de respuesta correcta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Respuesta correcta:"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupRespuestas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioOpcion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 1"/>
+
+            <RadioButton
+                android:id="@+id/radioOpcion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 2"/>
+
+            <RadioButton
+                android:id="@+id/radioOpcion3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 3"/>
+        </RadioGroup>
+
+        <!-- Botones de acción -->
+        <Button
+            android:id="@+id/buttonGuardarCambios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Cambios"
+            android:layout_marginTop="24dp" />
+
+        <Button
+            android:id="@+id/buttonEliminarPregunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar Pregunta"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_red_dark"/>
+    </LinearLayout>
+</ScrollView>
