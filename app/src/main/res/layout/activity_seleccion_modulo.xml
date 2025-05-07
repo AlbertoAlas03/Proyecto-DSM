@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/NombreAppTXT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/PantallaSeleccionTXT"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/ModuloTXT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:text="@string/UsuarioActivoTXT"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/UsuarioSesionTXT"
+            android:textSize="16sp" />-->
+
+
+
+        <Button
+            android:id="@+id/Btn_Opcion1"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/holo_blue_light"
+            android:text="@string/Btn_Opcion1" />
+
+        <Button
+            android:id="@+id/Btn_Opcion2"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/holo_blue_light"
+            android:text="@string/Btn_oPCion2" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>
