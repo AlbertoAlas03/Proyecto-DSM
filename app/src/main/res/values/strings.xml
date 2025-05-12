@@ -1,35 +1,35 @@
 <resources>
     <string name="app_name">AG221353_MS172008_GG171680</string>
     <!-- Main -->
-<string name="Btn_Login">Login</string>
-<string name="Btn_Registro">Registro</string>
+    <string name="Btn_Login">Login</string>
+    <string name="Btn_Registro">Registro</string>
 
-<!--Registro-->
-<string name="CrearCuentaTXT">Crear cuenta</string>
-<string name="NombreAppTXT">EVALUACIONES</string>
-<string name="NombreModuloTXT">Modulo de Administracion</string>
-<string name="NombreEt">Nombres</string>
-<string name="CorreoEt">Correo electrónico</string>
-<string name="ContaseñaEt">Contraseña</string>
-<string name="ConfirmarContraseñaEt">Confirmar contraseña</string>
-<string name="RegistrarUsuario">Registrar</string>
-<string name="TengounacuentaTXT">Tengo cuenta</string>
+    <!--Registro-->
+    <string name="CrearCuentaTXT">Crear cuenta</string>
+    <string name="NombreAppTXT">EVALUACIONES</string>
+    <string name="NombreModuloTXT">Modulo de Administracion</string>
+    <string name="NombreEt">Nombres</string>
+    <string name="CorreoEt">Correo electrónico</string>
+    <string name="ContaseñaEt">Contraseña</string>
+    <string name="ConfirmarContraseñaEt">Confirmar contraseña</string>
+    <string name="RegistrarUsuario">Registrar</string>
+    <string name="TengounacuentaTXT">Tengo cuenta</string>
 
 
-<!--Login-->
-<string name="IniciarSesionTXT">Ingrese sus credenciales</string>
-<string name="CorreoLogin">Usuario</string>
-<string name="PassLogin">Contraseña</string>
-<string name="Btn_Logeo">Iniciar Sesion</string>
-<string name="Btn_Salir">Salir</string>
+    <!--Login-->
+    <string name="IniciarSesionTXT">Ingrese sus credenciales</string>
+    <string name="CorreoLogin">Usuario</string>
+    <string name="PassLogin">Contraseña</string>
+    <string name="Btn_Logeo">Iniciar Sesion</string>
+    <string name="Btn_Salir">Salir</string>
 
-<!--Menu Principal-->
-<string name="BienvenidoPrincipal">Bienvenido(a)</string>
-<string name="UidPrincipal"> -- </string>
-<string name="NombresPrincipal"> -- </string>
-<string name="CorreoPrincipal"> -- </string>
+    <!--Menu Principal-->
+    <string name="BienvenidoPrincipal">Bienvenido(a)</string>
+    <string name="UidPrincipal"> -- </string>
+    <string name="NombresPrincipal"> -- </string>
+    <string name="CorreoPrincipal"> -- </string>
 
-<!--Seleccionar-->
+    <!--Seleccionar-->
     <string name="PantallaSeleccionTXT">Administrar Examenes</string>
     <string name="UsuarioActivoTXT">Usuario activo</string>
     <string name="UsuarioSesionTXT">Nombre usuario</string>

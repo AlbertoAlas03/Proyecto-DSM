@@ -29,9 +29,9 @@ class SeleccionarModuloActivity : AppCompatActivity() {
             finish()
         }
 
-
         btnOpcion2.setOnClickListener {
-            // Acción para la opción 2
+            val intent = Intent(this, RealizarEvaluacionActivity::class.java)
+            startActivity(intent)
         }
     }
 }
