@@ -1,4 +1,5 @@
 package com.example.ag221353_ms172008_gg171680
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -22,9 +23,12 @@ class SeleccionarModuloActivity : AppCompatActivity() {
         val btnOpcion2 = findViewById<Button>(R.id.Btn_Opcion2)
 
         btnOpcion1.setOnClickListener {
-            // Acción para la opción 1
-            // Ejemplo: Toast.makeText(this, "Opción 1", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("USUARIO_ID", intent.getIntExtra("USUARIO_ID", -1))
+            startActivity(intent)
+            finish()
         }
+
 
         btnOpcion2.setOnClickListener {
             // Acción para la opción 2

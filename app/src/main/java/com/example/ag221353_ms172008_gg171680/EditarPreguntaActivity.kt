@@ -1,105 +1,114 @@
 package com.example.ag221353_ms172008_gg171680
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ag221353_ms172008_gg171680.database.DatabaseContract
+import com.example.ag221353_ms172008_gg171680.database.DatabaseContract.PreguntaEntry
 import com.example.ag221353_ms172008_gg171680.database.DatabaseHelper
 
 class EditarPreguntaActivity : AppCompatActivity() {
-    private var editTextPregunta: EditText? = null
-    private var editTextOpcion1: EditText? = null
-    private var editTextOpcion2: EditText? = null
-    private var editTextOpcion3: EditText? = null
-    private var radioGroupRespuestas: RadioGroup? = null
-    private var buttonGuardarCambios: Button? = null
-    private var buttonEliminarPregunta: Button? = null
-    private var dbHelper: DatabaseHelper? = null
-    private var preguntaId = 0
 
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var db: SQLiteDatabase
+    private lateinit var editTextPregunta: EditText
+    private lateinit var buttonGuardar: Button
+    private var preguntaId: Int = -1
+    private var evaluacionId: Int = -1
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_pregunta)
 
+        // Obtener IDs del Intent
         preguntaId = intent.getIntExtra("PREGUNTA_ID", -1)
+        evaluacionId = intent.getIntExtra("EVALUACION_ID", -1)
+
+        if (preguntaId == -1 || evaluacionId == -1) {
+            Toast.makeText(this, "Error: No se especificó la pregunta", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        // Inicializar base de datos
         dbHelper = DatabaseHelper(this)
+        db = dbHelper.writableDatabase
 
+        // Configurar UI
         editTextPregunta = findViewById(R.id.editTextPregunta)
-        editTextOpcion1 = findViewById(R.id.editTextOpcion1)
-        editTextOpcion2 = findViewById(R.id.editTextOpcion2)
-        editTextOpcion3 = findViewById(R.id.editTextOpcion3)
-        radioGroupRespuestas = findViewById(R.id.radioGroupRespuestas)
-        buttonGuardarCambios = findViewById<Button>(R.id.buttonGuardarCambios)
-        buttonEliminarPregunta = findViewById<Button>(R.id.buttonEliminarPregunta)
+        buttonGuardar = findViewById(R.id.buttonGuardar)
 
+        // Cargar datos de la pregunta
         cargarPregunta()
 
-        buttonGuardarCambios?.setOnClickListener(View.OnClickListener { v: View? -> guardarCambios() })
-        buttonEliminarPregunta?.setOnClickListener(View.OnClickListener { v: View? -> eliminarPregunta() })
+        // Configurar botón
+        buttonGuardar.setOnClickListener {
+            guardarCambios()
+        }
     }
 
     private fun cargarPregunta() {
-        val db = dbHelper!!.readableDatabase
-
-        // Cargar texto de la pregunta
-        val cursorPregunta = db.query(
-            DatabaseContract.PreguntaEntry.TABLE_NAME,
-            arrayOf(DatabaseContract.PreguntaEntry.COLUMN_TEXTO),
-            DatabaseContract.PreguntaEntry.COLUMN_ID + "=?",
+        val cursor = db.query(
+            PreguntaEntry.TABLE_NAME,
+            null,
+            "${PreguntaEntry.COLUMN_ID} = ?",
             arrayOf(preguntaId.toString()),
             null, null, null
         )
 
-        if (cursorPregunta.moveToFirst()) {
-            editTextPregunta!!.setText(cursorPregunta.getString(0))
-        }
-        cursorPregunta.close()
-
-        // Cargar opciones de respuesta
-        val cursorRespuestas = db.query(
-            DatabaseContract.RespuestaEntry.TABLE_NAME,
-            arrayOf(
-                DatabaseContract.RespuestaEntry.COLUMN_TEXTO,
-                DatabaseContract.RespuestaEntry.COLUMN_CORRECTA
-            ),
-            DatabaseContract.RespuestaEntry.COLUMN_PREGUNTA_ID + "=?",
-            arrayOf(preguntaId.toString()),
-            null, null, null
-        )
-
-        if (cursorRespuestas.moveToFirst()) {
-            editTextOpcion1!!.setText(cursorRespuestas.getString(0))
-            if (cursorRespuestas.getInt(1) == 1) radioGroupRespuestas!!.check(R.id.radioOpcion1)
-
-            if (cursorRespuestas.moveToNext()) {
-                editTextOpcion2!!.setText(cursorRespuestas.getString(0))
-                if (cursorRespuestas.getInt(1) == 1) radioGroupRespuestas!!.check(R.id.radioOpcion2)
+        try {
+            if (cursor.moveToFirst()) {
+                val textoPregunta = cursor.getString(
+                    cursor.getColumnIndexOrThrow(PreguntaEntry.COLUMN_TEXTO)
+                )
+                editTextPregunta.setText(textoPregunta)
             }
-
-            if (cursorRespuestas.moveToNext()) {
-                editTextOpcion3!!.setText(cursorRespuestas.getString(0))
-                if (cursorRespuestas.getInt(1) == 1) radioGroupRespuestas!!.check(R.id.radioOpcion3)
-            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al cargar la pregunta", Toast.LENGTH_SHORT).show()
+        } finally {
+            cursor.close()
         }
-        cursorRespuestas.close()
     }
 
     private fun guardarCambios() {
+        val nuevoTexto = editTextPregunta.text.toString().trim()
 
+        if (nuevoTexto.isEmpty()) {
+            Toast.makeText(this, "El texto de la pregunta no puede estar vacío", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val values = ContentValues().apply {
+            put(PreguntaEntry.COLUMN_TEXTO, nuevoTexto)
+        }
+
+        try {
+            val rowsAffected = db.update(
+                PreguntaEntry.TABLE_NAME,
+                values,
+                "${PreguntaEntry.COLUMN_ID} = ?",
+                arrayOf(preguntaId.toString())
+            )
+
+            if (rowsAffected > 0) {
+                Toast.makeText(this, "Pregunta actualizada", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, "Error al actualizar la pregunta", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error al guardar cambios", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun eliminarPregunta() {
-        val db = dbHelper!!.writableDatabase
-        db.delete(
-            DatabaseContract.PreguntaEntry.TABLE_NAME,
-            DatabaseContract.PreguntaEntry.COLUMN_ID + "=?",
-            arrayOf(preguntaId.toString())
-        )
-        Toast.makeText(this, "Pregunta eliminada", Toast.LENGTH_SHORT).show()
-        finish()
+    override fun onDestroy() {
+        dbHelper.close()
+        super.onDestroy()
     }
 }
