@@ -8,22 +8,23 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear nueva evaluación"
+        android:text="Editar preguntas y respuestas"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextNombreEvaluacion"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPreguntas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre de la evaluación" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
 
     <Button
-        android:id="@+id/buttonGuardarEvaluacion"
+        android:id="@+id/buttonVolver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar Evaluación"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp"
+        android:text="Volver" />
 </LinearLayout>

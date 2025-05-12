@@ -17,7 +17,7 @@ class CrearEvaluacionActivity : AppCompatActivity() {
     private lateinit var buttonGuardarEvaluacion: Button
     private lateinit var dbHelper: DatabaseHelper
     private var usuarioId: Int = -1
-    private lateinit var db: SQLiteDatabase
+    private lateinit var db: SQLiteDatabase // Añadido para manejo explícito
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

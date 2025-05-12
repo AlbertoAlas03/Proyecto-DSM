@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.ag221353_ms172008_gg171680"
+    >
 
     <application
         android:allowBackup="true"
@@ -28,6 +30,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CrearEvaluacionActivity"
+            android:exported="false" />
+        <activity android:name=".AgregarPreguntaActivity" />
+        <activity android:name=".EditarPreguntaActivity" />
+        <activity android:name=".EditarPreguntasActivity" />
+
     </application>
 
+    <queries>
+        <package android:name="com.lge.launcher3" />
+    </queries>
 </manifest>

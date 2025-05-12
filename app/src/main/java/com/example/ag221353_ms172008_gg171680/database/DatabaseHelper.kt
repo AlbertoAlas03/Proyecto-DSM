@@ -26,12 +26,11 @@ class DatabaseHelper(context: Context?) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
         db.execSQL("DROP TABLE IF EXISTS " + RespuestaEntry.TABLE_NAME)
         db.execSQL("DROP TABLE IF EXISTS " + PreguntaEntry.TABLE_NAME)
         db.execSQL("DROP TABLE IF EXISTS " + EvaluacionEntry.TABLE_NAME)
         db.execSQL("DROP TABLE IF EXISTS " + UsuarioEntry.TABLE_NAME)
-        onCreate(db)
+        onCreate(db)  // Se recrearán las tablas con las nuevas reglas CASCADE
     }
 
     override fun onConfigure(db: SQLiteDatabase) {
@@ -42,7 +41,7 @@ class DatabaseHelper(context: Context?) :
 
     companion object {
         private const val DATABASE_NAME = "evaluaciones.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 5
 
 
         private const val SQL_CREATE_USUARIOS = "CREATE TABLE " + UsuarioEntry.TABLE_NAME + " (" +
@@ -56,14 +55,15 @@ class DatabaseHelper(context: Context?) :
                     EvaluacionEntry.COLUMN_NOMBRE + " TEXT NOT NULL, " +
                     EvaluacionEntry.COLUMN_USUARIO_ID + " INTEGER, " +
                     "FOREIGN KEY(" + EvaluacionEntry.COLUMN_USUARIO_ID + ") REFERENCES " +
-                    UsuarioEntry.TABLE_NAME + "(" + UsuarioEntry.COLUMN_ID + "))"
+                    UsuarioEntry.TABLE_NAME + "(" + UsuarioEntry.COLUMN_ID + ") ON DELETE CASCADE)"
 
-        private const val SQL_CREATE_PREGUNTAS = "CREATE TABLE " + PreguntaEntry.TABLE_NAME + " (" +
-                PreguntaEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                PreguntaEntry.COLUMN_TEXTO + " TEXT NOT NULL, " +
-                PreguntaEntry.COLUMN_EVALUACION_ID + " INTEGER, " +
-                "FOREIGN KEY(" + PreguntaEntry.COLUMN_EVALUACION_ID + ") REFERENCES " +
-                EvaluacionEntry.TABLE_NAME + "(" + EvaluacionEntry.COLUMN_ID + "))"
+        private const val SQL_CREATE_PREGUNTAS =
+            "CREATE TABLE " + PreguntaEntry.TABLE_NAME + " (" +
+                    PreguntaEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    PreguntaEntry.COLUMN_TEXTO + " TEXT NOT NULL, " +
+                    PreguntaEntry.COLUMN_EVALUACION_ID + " INTEGER, " +
+                    "FOREIGN KEY(" + PreguntaEntry.COLUMN_EVALUACION_ID + ") REFERENCES " +
+                    EvaluacionEntry.TABLE_NAME + "(" + EvaluacionEntry.COLUMN_ID + ") ON DELETE CASCADE)"
 
         private const val SQL_CREATE_RESPUESTAS =
             "CREATE TABLE " + RespuestaEntry.TABLE_NAME + " (" +
@@ -72,6 +72,6 @@ class DatabaseHelper(context: Context?) :
                     RespuestaEntry.COLUMN_CORRECTA + " INTEGER DEFAULT 0, " +
                     RespuestaEntry.COLUMN_PREGUNTA_ID + " INTEGER, " +
                     "FOREIGN KEY(" + RespuestaEntry.COLUMN_PREGUNTA_ID + ") REFERENCES " +
-                    PreguntaEntry.TABLE_NAME + "(" + PreguntaEntry.COLUMN_ID + "))"
+                    PreguntaEntry.TABLE_NAME + "(" + PreguntaEntry.COLUMN_ID + ") ON DELETE CASCADE)"
     }
 }

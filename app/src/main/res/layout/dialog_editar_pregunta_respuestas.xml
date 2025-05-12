@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -11,12 +11,21 @@
         android:layout_height="wrap_content"
         android:hint="Texto de la pregunta"
         android:inputType="textMultiLine"
-        android:minLines="3" />
+        android:minLines="3"/>
 
-    <Button
-        android:id="@+id/buttonGuardar"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Respuestas:"
         android:layout_marginTop="16dp"
-        android:text="Guardar Cambios" />
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/containerRespuestas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Se ha eliminado el Button btnAgregarRespuesta -->
 </LinearLayout>

@@ -24,7 +24,7 @@ class IngresarModuloActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ingreso_modulo) // Cambia esto por el nombre real de tu archivo XML
+        setContentView(R.layout.activity_ingreso_modulo)
 
         dbHelper =DatabaseHelper(this)
         database = dbHelper.readableDatabase
